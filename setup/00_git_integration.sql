@@ -3,6 +3,16 @@
   Public GitHub 리포지토리를 Snowflake에 연결합니다.
   
   GitHub: https://github.com/HongJongHyun/Snowflake_ML_Workshop
+
+  [Snowsight Git Workspace 설정 정보]
+  ─────────────────────────────────────────────────
+  - Repository URL : https://github.com/HongJongHyun/Snowflake_ML_Workshop.git
+  - Branch         : main
+  - Database       : SNOW_ML_WORKSHOP
+  - Schema         : CVS_DEMO
+  - API Integration: snow_ml_workshop_git_api
+  - Authentication : 불필요 (Public Repository)
+  ─────────────────────────────────────────────────
 =============================================================*/
 
 USE ROLE ACCOUNTADMIN;
