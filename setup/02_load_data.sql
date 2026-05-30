@@ -6,8 +6,8 @@
 USE DATABASE SNOW_ML_WORKSHOP;
 USE SCHEMA CVS_DEMO;
 
--- Git 스테이지 경로 참조 (리포지토리 이름: snow_ml_workshop)
--- 사전 조건: 00_git_integration.sql로 Git Integration + Repository 생성 완료
+-- Git 스테이지 경로 참조 (리포지토리 이름: snow_ml_workshop_repo)
+-- 사전 조건: 00_git_integration.sql 실행 완료
 
 -- 1. 매장 마스터
 COPY INTO STORES
