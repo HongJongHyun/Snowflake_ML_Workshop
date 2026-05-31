@@ -1,0 +1,15 @@
+[project]
+name = "snow-cvs-forecast-dashboard"
+version = "1.0.0"
+description = "Snow편의점 매출 예측 대시보드"
+
+[tool.snowflake.project]
+definition_version = "2"
+
+[tool.snowflake.project.streamlit]
+main_file = "streamlit_app.py"
+query_warehouse = "ML_WORKSHOP_WH"
+
+[project.dependencies]
+altair = "*"
+pandas = "*"
