@@ -173,8 +173,8 @@ with st.container(border=True):
         column_config={
             "FORECAST_DATE": st.column_config.DateColumn("예측 날짜"),
             "CATEGORY_L1": "카테고리",
-            "PREDICTED_SALES": st.column_config.NumberColumn("예측 매출", format="₩%,.0f"),
-            "LOWER_BOUND": st.column_config.NumberColumn("하한", format="₩%,.0f"),
-            "UPPER_BOUND": st.column_config.NumberColumn("상한", format="₩%,.0f"),
+            "PREDICTED_SALES": st.column_config.NumberColumn("예측 매출", format="%.0f 원"),
+            "LOWER_BOUND": st.column_config.NumberColumn("하한", format="%.0f 원"),
+            "UPPER_BOUND": st.column_config.NumberColumn("상한", format="%.0f 원"),
         }
     )
