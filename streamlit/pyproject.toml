@@ -10,6 +10,7 @@ definition_version = "2"
 main_file = "streamlit_app.py"
 query_warehouse = "ML_WORKSHOP_WH"
 
-[project.dependencies]
-altair = "*"
-pandas = "*"
+dependencies = [
+    "altair",
+    "pandas",
+]
