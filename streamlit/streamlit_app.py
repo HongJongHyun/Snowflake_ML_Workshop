@@ -167,22 +167,15 @@ with st.container(border=True):
         display_df = category_forecast[category_forecast['CATEGORY_L1'] == category_filter]
 
     display_data = display_df[['FORECAST_DATE', 'CATEGORY_L1', 'PREDICTED_SALES', 'LOWER_BOUND', 'UPPER_BOUND']].copy()
-    display_data['PREDICTED_SALES'] = display_data['PREDICTED_SALES'].apply(lambda x: f"₩{x:,.0f}")
-    display_data['LOWER_BOUND'] = display_data['LOWER_BOUND'].apply(lambda x: f"₩{x:,.0f}")
-    display_data['UPPER_BOUND'] = display_data['UPPER_BOUND'].apply(lambda x: f"₩{x:,.0f}")
+    display_data.columns = ['예측 날짜', '카테고리', '예측 매출', '하한', '상한']
+    display_data['예측 매출'] = display_data['예측 매출'].apply(lambda x: f"₩{x:,.0f}")
+    display_data['하한'] = display_data['하한'].apply(lambda x: f"₩{x:,.0f}")
+    display_data['상한'] = display_data['상한'].apply(lambda x: f"₩{x:,.0f}")
 
-    st.dataframe(
-        display_data.style.set_properties(
-            subset=['PREDICTED_SALES', 'LOWER_BOUND', 'UPPER_BOUND'],
-            **{'text-align': 'right'}
-        ),
-        hide_index=True,
-        use_container_width=True,
-        column_config={
-            "FORECAST_DATE": st.column_config.DateColumn("예측 날짜"),
-            "CATEGORY_L1": "카테고리",
-            "PREDICTED_SALES": "예측 매출",
-            "LOWER_BOUND": "하한",
-            "UPPER_BOUND": "상한",
-        }
-    )
+    html = display_data.reset_index(drop=True).to_html(index=False, escape=False)
+    html = html.replace('<table', '<table style="width:100%; border-collapse:collapse; font-size:14px;"')
+    html = html.replace('<th>', '<th style="text-align:center; padding:8px; border-bottom:2px solid #ddd; background:#f8f9fa;">')
+    for col in ['예측 매출', '하한', '상한']:
+        html = html.replace(f'<td>₩', f'<td style="text-align:right; padding:6px 12px;">₩')
+
+    st.markdown(html, unsafe_allow_html=True)
