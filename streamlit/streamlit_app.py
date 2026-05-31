@@ -166,15 +166,20 @@ with st.container(border=True):
     else:
         display_df = category_forecast[category_forecast['CATEGORY_L1'] == category_filter]
 
+    display_data = display_df[['FORECAST_DATE', 'CATEGORY_L1', 'PREDICTED_SALES', 'LOWER_BOUND', 'UPPER_BOUND']].copy()
+    display_data['PREDICTED_SALES'] = display_data['PREDICTED_SALES'].apply(lambda x: f"₩{x:,.0f}")
+    display_data['LOWER_BOUND'] = display_data['LOWER_BOUND'].apply(lambda x: f"₩{x:,.0f}")
+    display_data['UPPER_BOUND'] = display_data['UPPER_BOUND'].apply(lambda x: f"₩{x:,.0f}")
+
     st.dataframe(
-        display_df[['FORECAST_DATE', 'CATEGORY_L1', 'PREDICTED_SALES', 'LOWER_BOUND', 'UPPER_BOUND']],
+        display_data,
         hide_index=True,
         use_container_width=True,
         column_config={
             "FORECAST_DATE": st.column_config.DateColumn("예측 날짜"),
             "CATEGORY_L1": "카테고리",
-            "PREDICTED_SALES": st.column_config.NumberColumn("예측 매출"),
-            "LOWER_BOUND": st.column_config.NumberColumn("하한"),
-            "UPPER_BOUND": st.column_config.NumberColumn("상한"),
+            "PREDICTED_SALES": "예측 매출",
+            "LOWER_BOUND": "하한",
+            "UPPER_BOUND": "상한",
         }
     )
