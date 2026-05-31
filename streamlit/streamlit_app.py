@@ -172,7 +172,10 @@ with st.container(border=True):
     display_data['UPPER_BOUND'] = display_data['UPPER_BOUND'].apply(lambda x: f"₩{x:,.0f}")
 
     st.dataframe(
-        display_data,
+        display_data.style.set_properties(
+            subset=['PREDICTED_SALES', 'LOWER_BOUND', 'UPPER_BOUND'],
+            **{'text-align': 'right'}
+        ),
         hide_index=True,
         use_container_width=True,
         column_config={
