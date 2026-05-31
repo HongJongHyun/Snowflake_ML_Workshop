@@ -59,14 +59,19 @@ with st.container(horizontal=True):
         border=True
     )
     if len(monitoring_df) > 0:
-        latest_mape = monitoring_df.iloc[0].get('METRIC_VALUE', 0)
-        st.metric(
-            "모델 MAPE",
-            f"{latest_mape:.1f}%",
-            delta="정상" if latest_mape < 20 else "주의",
-            delta_color="normal" if latest_mape < 20 else "inverse",
-            border=True
-        )
+        latest_mape = monitoring_df.iloc[0].get('METRIC_VALUE', None)
+        if latest_mape is not None and not pd.isna(latest_mape):
+            st.metric(
+                "모델 MAPE",
+                f"{latest_mape:.1f}%",
+                delta="정상" if latest_mape < 20 else "주의",
+                delta_color="normal" if latest_mape < 20 else "inverse",
+                border=True
+            )
+        else:
+            st.metric("모델 MAPE", "—", delta="미측정", delta_color="off", border=True)
+    else:
+        st.metric("모델 MAPE", "—", delta="미측정", delta_color="off", border=True)
 
 st.divider()
 
